@@ -2,11 +2,11 @@ package templates
 
 import "github.com/jmarren/katana/data"
 
-templ SquareBody(d *data.SquareData) {
+templ SquareBody(d *data.SquareBodyData) {
 	<div id="square"></div>
 }
 
-templ SquareHead() {
+templ SquareHead(d *data.SquareHeadData) {
 	<style id="square-styles">
 		#square {
 			width: 100px;

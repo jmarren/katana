@@ -1,14 +1,16 @@
 package templates
 
-templ ProfileBody(child *templ.Component) {
+import "github.com/jmarren/katana/data"
+
+templ ProfileBody(d *data.ProfileBodyData) {
 	<div id="profile">
-		@(*child)
-		<!--		{ data.Username } -->
+		@(*(d.Child))
+		{ d.Username }
 	</div>
 }
 
-templ ProfileHead(child *templ.Component) {
-	@(*child)
+templ ProfileHead(d *data.ProfileHeadData) {
+	@(*(d.Child))
 	<style id="profile-styles">
 		#profile {
 			color: red;

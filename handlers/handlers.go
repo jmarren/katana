@@ -9,13 +9,21 @@ import (
 )
 
 func ProfileHandler(w http.ResponseWriter, r *http.Request) {
-	// profile := src.Wrap()
-	square := src.NewComponent(data.Square, templates.SquareBody, templates.SquareHead)(data.EmptyData{})
-	profileWSquare := square.Wrap(templates.ProfileHead, templates.ProfileBody)
-	profileWSquare.Render(w, r, templates.Basefunc)
+	profileFunc := src.NewComponent(data.ProfileBody, data.ProfileHead, templates.ProfileBody, templates.ProfileHead)
+	squareBody := templates.SquareBody(data.SquareBody(data.EmptyData{}))
+	squareHead := templates.SquareHead(data.SquareHead(data.EmptyData{}))
+	profile := profileFunc(
+		data.ProfileBodyCtr{
+			R:     r,
+			Child: &squareBody,
+		},
+		data.ProfileHeadCtr{
+			Child: &squareHead,
+		},
+	)
 
-	// profile := src.NewComponent(data.Profile, templates.ProfileBody, templates.ProfileHead)(r)
-	// profile.Render(w, r, templates.Basefunc)
+	// profileWSquare := square.Wrap(templates.ProfileHead, templates.ProfileBody)
+	profile.Render(w, r, templates.Basefunc)
 }
 
 func ProfileWithSquareHandler(w http.ResponseWriter, r *http.Request) {

@@ -3,26 +3,52 @@ package data
 import (
 	// "github.com/jmarren/katana/src"
 	"net/http"
+
+	"github.com/a-h/templ"
 	// "github.com/jmarren/katana/templates"
 )
 
-type ProfileData struct {
+type ProfileBodyData struct {
 	Username string
-	Square   SquareData
+	Child    *templ.Component
+}
+
+type ProfileHeadData struct {
+	Child *templ.Component
 }
 
 type EmptyData struct{}
 
-type SquareData EmptyData
+type SquareHeadData EmptyData
+type SquareBodyData EmptyData
 
-func Square(EmptyData) *SquareData {
-	return &SquareData{}
+func SquareBody(EmptyData) *SquareBodyData {
+	return &SquareBodyData{}
 }
 
-func Profile(r *http.Request) *ProfileData {
-	username := r.PathValue("username")
-	return &ProfileData{
+func SquareHead(EmptyData) *SquareHeadData {
+	return &SquareHeadData{}
+}
+
+type ProfileBodyCtr struct {
+	R     *http.Request
+	Child *templ.Component
+}
+
+func ProfileBody(c ProfileBodyCtr) *ProfileBodyData {
+	username := c.R.PathValue("username")
+	return &ProfileBodyData{
 		username,
-		SquareData{},
+		c.Child,
+	}
+}
+
+type ProfileHeadCtr struct {
+	Child *templ.Component
+}
+
+func ProfileHead(c ProfileHeadCtr) *ProfileHeadData {
+	return &ProfileHeadData{
+		c.Child,
 	}
 }
