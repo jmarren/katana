@@ -8,28 +8,31 @@ import (
 )
 
 type Index struct {
-	Head *templ.Component
-	Body *templ.Component
+	Title string
+	Component
 }
 
-func (i *Index) setHead(name string) {
-	child, err := GetNodeFactory(name)
-	if err != nil {
-		fmt.Printf("error:%s", err)
-	}
-	child.setHead(child.getName())
+func (i *Index) setHead(child INode) {
 	head := templates.IndexHead(child.getHead())
 	i.Head = &head
 }
 
-func (i *Index) setBody(name string) {
-	child, err := GetNodeFactory(name)
-	if err != nil {
-		fmt.Printf("error:%s", err)
-	}
-	child.setBody(child.getName())
+func (i *Index) setBody(child INode) {
 	body := templates.IndexBody(child.getBody())
 	i.Body = &body
+}
+
+func (i *Index) setData() {
+	i.Title = "index page"
+}
+
+func (i *Index) setChild(child INode) {
+	child.setData()
+	// child.setHead(nil)
+	// child.setBody(nil)
+	i.setData()
+	i.setHead(child)
+	i.setBody(child)
 }
 
 func (i *Index) getHead() *templ.Component {
@@ -50,8 +53,11 @@ func (i *Index) Render(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Printf("error: %s\n", err)
 	}
-	i.setBody(child.getName())
-	i.setHead(child.getName())
+	child.setData()
+	child.setBody(nil)
+	child.setHead(nil)
+	i.setBody(child)
+	i.setHead(child)
 	body := i.getBody()
 	head := i.getHead()
 	component := templates.Base(head, body)

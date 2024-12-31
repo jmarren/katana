@@ -11,14 +11,17 @@ type Contact Component
 func (i *Contact) getName() string {
 	return "contact"
 }
-func (i *Contact) setHead(name string) {
+func (i *Contact) setHead(INode) {
 	head := templates.ContactHead()
 	i.Head = &head
 }
 
-func (i *Contact) setBody(name string) {
+func (i *Contact) setBody(INode) {
 	body := templates.ContactBody()
 	i.Body = &body
+}
+
+func (i *Contact) setData() {
 }
 
 func (i *Contact) getHead() *templ.Component {
@@ -30,8 +33,9 @@ func (i *Contact) getBody() *templ.Component {
 }
 
 func (i *Contact) Render(w http.ResponseWriter, r *http.Request) {
-	i.setBody("")
-	i.setHead("")
+	i.setData()
+	i.setBody(nil)
+	i.setHead(nil)
 	body := i.getBody()
 	head := i.getHead()
 	component := templates.Base(head, body)
