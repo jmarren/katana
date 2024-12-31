@@ -13,12 +13,9 @@ import (
 
 func main() {
 	fmt.Println("running")
-	// about := components.Run()
-	// node, err := build.GetNodeFactory("index")
-	// if err != nil {
-	// 	fmt.Printf("error: %s\n", err)
-	// }
 
-	http.HandleFunc("/{username}", handlers.ProfileHandler)
+	http.HandleFunc("GET /{page}", handlers.PageHandler)
+	http.HandleFunc("GET /square/{color}", handlers.SquareHandler)
+
 	http.ListenAndServe(":8080", nil)
 }

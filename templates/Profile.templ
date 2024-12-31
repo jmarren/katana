@@ -3,7 +3,7 @@ package templates
 import "github.com/jmarren/katana/data"
 
 templ ProfileBody(d *data.ProfileBodyData) {
-	<div id="profile">
+	<div id="page">
 		@(*(d.Child))
 		{ d.Username }
 	</div>
@@ -12,7 +12,7 @@ templ ProfileBody(d *data.ProfileBodyData) {
 templ ProfileHead(d *data.ProfileHeadData) {
 	@(*(d.Child))
 	<style id="profile-styles">
-		#profile {
+		#page {
 			color: red;
 			background-color: yellow;
 			font-size: 30px;

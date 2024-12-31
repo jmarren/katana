@@ -7,18 +7,20 @@ import (
 	"github.com/jmarren/katana/templates"
 )
 
-func Square() *src.Component {
-	squareBodyCtr := src.EltCtr[struct{}, *data.SquareBodyData]{
+func Square(color string) *src.Component {
+	squareBodyCtr := src.EltCtr[data.SquareBodyData, *data.SquareBodyData]{
 		Ctr:       data.SquareBody,
 		TemplFunc: templates.SquareBody,
 	}
 
-	squareHeadCtr := src.EltCtr[struct{}, *data.SquareHeadData]{
+	squareHeadCtr := src.EltCtr[data.SquareHeadData, *data.SquareHeadData]{
 		Ctr:       data.SquareHead,
 		TemplFunc: templates.SquareHead,
 	}
 
-	squareFunc := src.NewComponent(squareBodyCtr, squareHeadCtr)
-	square := squareFunc(data.EmptyData{}, data.EmptyData{})
+	squareFunc := src.NewComponent("square", squareBodyCtr, squareHeadCtr)
+	square := squareFunc(data.SquareBodyData{
+		Color: color,
+	}, data.SquareHeadData{})
 	return square
 }

@@ -1,0 +1,17 @@
+package templates
+
+import "github.com/jmarren/katana/src"
+
+templ WrapMerge(c *src.Component) {
+	<head hx-merge="merge">
+		@(*(c.Head))
+	</head>
+	@(*(c.Body))
+}
+
+templ WrapAppend(c *src.Component) {
+	<head hx-merge="append">
+		@(*(c.Head))
+	</head>
+	@(*(c.Body))
+}

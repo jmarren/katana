@@ -8,6 +8,7 @@ import (
 type Component struct {
 	Body *templ.Component
 	Head *templ.Component
+	Name string
 }
 
 type ComponentConstructor[T any, S any] func(T) S
@@ -32,7 +33,7 @@ type EltCtr[T any, S any] struct {
 
 // Takes a data constructor, a bodyFunc and a headFunc and returns a function that will accept some data,
 // construct it using the constructor, inject the result into the body func, and return a Component
-func NewComponent[T any, S any, U any, V any](bodyElt EltCtr[T, S], headElt EltCtr[U, V]) ComponentFunc[T, U] {
+func NewComponent[T any, S any, U any, V any](name string, bodyElt EltCtr[T, S], headElt EltCtr[U, V]) ComponentFunc[T, U] {
 	return func(t T, u U) *Component {
 		bodyData := bodyElt.Ctr(t)
 		headData := headElt.Ctr(u)
@@ -41,6 +42,7 @@ func NewComponent[T any, S any, U any, V any](bodyElt EltCtr[T, S], headElt EltC
 		return &Component{
 			&body,
 			&head,
+			name,
 		}
 	}
 }
@@ -53,11 +55,15 @@ func (c *Component) Render(w http.ResponseWriter, r *http.Request, baseFunc Pare
 	full.Render(r.Context(), w)
 }
 
-func (c *Component) Wrap(headWrapper WrapperTemplate, bodyWrapper WrapperTemplate) *Component {
-	head := headWrapper(c.Head)
-	body := bodyWrapper(c.Body)
-	return &Component{
-		&body,
-		&head,
-	}
-}
+// func (c *Component) RenderWrap(w http.ResponseWriter, r *http.Request) {
+// 	full :=
+// }
+
+// func (c *Component) Wrap(headWrapper WrapperTemplate, bodyWrapper WrapperTemplate) *Component {
+// 	head := headWrapper(c.Head)
+// 	body := bodyWrapper(c.Body)
+// 	return &Component{
+// 		&body,
+// 		&head,
+// 	}
+// }

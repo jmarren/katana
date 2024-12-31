@@ -2,18 +2,19 @@ package templates
 
 import (
 	"fmt"
-	)
+	"github.com/jmarren/katana/data"
+)
 
-templ AboutBody(num int) {
-	<div id="about-div">
-	<h1>About</h1>
-	<div>num is {fmt.Sprintf("%d", num) } </div>
+templ AboutBody(d *data.AboutBodyData) {
+	<div id="page">
+		<h1>About</h1>
+		<div>num is { fmt.Sprintf("%d", d.Num) } </div>
 	</div>
 }
 
-templ AboutHead() {
+templ AboutHead(d *data.AboutHeadData) {
 	<style>
-	#about-div {
+	#page {
 		font-size: 20px;
 		color: blue;
 	} 

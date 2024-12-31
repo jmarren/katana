@@ -7,6 +7,8 @@ templ Base(head *templ.Component, body *templ.Component) {
 	<html lang="en">
 		@Head(head)
 		<body hx-ext="head-support,preload" hx-headers="{}" hx-sync="this:queue all">
+			<button hx-get="/profile" hx-target="page">Profile</button>
+			<button hx-get="/about" hx-target="page">About</button>
 			@(*body)
 		</body>
 	</html>
@@ -17,6 +19,8 @@ templ Basefunc(c *src.Component) {
 	<html lang="en">
 		@Head(c.Head)
 		<body hx-ext="head-support,preload" hx-headers="{}" hx-sync="this:queue all">
+			<button hx-get="/profile" hx-target="#page">Profile</button>
+			<button hx-get="/about" hx-target="#page">About</button>
 			@(*(c.Body))
 		</body>
 	</html>

@@ -2,53 +2,42 @@ package handlers
 
 import (
 	"github.com/jmarren/katana/cmpt"
-	"github.com/jmarren/katana/data"
-	// "github.com/jmarren/katana/render"
+	"github.com/jmarren/katana/render"
+	// "github.com/jmarren/katana/templates"
+	"fmt"
 	"net/http"
-
-	"github.com/jmarren/katana/src"
-	"github.com/jmarren/katana/templates"
 )
 
+func PageHandler(w http.ResponseWriter, r *http.Request) {
+	pageRequested := r.PathValue("page")
+	fmt.Printf("page requested: %s\n", pageRequested)
+	switch pageRequested {
+	case "profile":
+		ProfileHandler(w, r)
+	case "about":
+		AboutHandler(w, r)
+	default:
+		ProfileHandler(w, r)
+	}
+
+}
+
 func ProfileHandler(w http.ResponseWriter, r *http.Request) {
-	profileHeadCtr := src.EltCtr[data.ProfileHeadCtr, *data.ProfileHeadData]{
-		Ctr:       data.ProfileHead,
-		TemplFunc: templates.ProfileHead,
+	squareColor := r.URL.Query().Get("square")
+	if squareColor == "" {
+		squareColor = "red"
 	}
-
-	profileBodyCtr := src.EltCtr[data.ProfileBodyCtr, *data.ProfileBodyData]{
-		Ctr:       data.ProfileBody,
-		TemplFunc: templates.ProfileBody,
-	}
-
-	profileFunc := src.NewComponent(profileBodyCtr, profileHeadCtr)
-
-	square := cmpt.Square()
-
-	profile := profileFunc(
-		data.ProfileBodyCtr{
-			R:     r,
-			Child: square.Body,
-		},
-		data.ProfileHeadCtr{
-			Child: square.Head,
-		},
-	)
-
-	profile.Render(w, r, templates.Basefunc)
+	profile := cmpt.Profile(r, cmpt.Square(squareColor))
+	render.RenderPath(profile, w, r, "page")
 }
 
-func ProfileWithSquareHandler(w http.ResponseWriter, r *http.Request) {
-
+func AboutHandler(w http.ResponseWriter, r *http.Request) {
+	about := cmpt.About(r, 13)
+	render.RenderPath(about, w, r, "page")
 }
 
-// profile :=
-// profileWSquare := src.NewComponent()
-/*
-	WANT: profileWithSquare
-		-- Profile src.Component
-		-- with data
-
-*/
-
-// }
+func SquareHandler(w http.ResponseWriter, r *http.Request) {
+	color := r.PathValue("color")
+	square := cmpt.Square(color)
+	render.RenderQuery(square, w, r, color)
+}

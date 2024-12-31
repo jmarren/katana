@@ -3,7 +3,7 @@ package templates
 import "github.com/jmarren/katana/data"
 
 templ SquareBody(d *data.SquareBodyData) {
-	<div id="square"></div>
+	<div id="square" class={ d.Color } hx-get="/square/blue" hx-trigger="click"></div>
 }
 
 templ SquareHead(d *data.SquareHeadData) {
@@ -12,6 +12,12 @@ templ SquareHead(d *data.SquareHeadData) {
 			width: 100px;
 			height: 100px;
 			border: 1px solid blue;
+		} 
+		.red {
+			background-color: red;
+		} 
+		.blue {
+			background-color: blue;
 		} 
 	</style>
 }

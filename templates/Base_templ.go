@@ -39,7 +39,7 @@ func Base(head *templ.Component, body *templ.Component) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body hx-ext=\"head-support,preload\" hx-headers=\"{}\" hx-sync=\"this:queue all\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body hx-ext=\"head-support,preload\" hx-headers=\"{}\" hx-sync=\"this:queue all\"><button hx-get=\"/profile\" hx-target=\"page\">Profile</button> <button hx-get=\"/about\" hx-target=\"page\">About</button>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -84,7 +84,7 @@ func Basefunc(c *src.Component) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body hx-ext=\"head-support,preload\" hx-headers=\"{}\" hx-sync=\"this:queue all\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<body hx-ext=\"head-support,preload\" hx-headers=\"{}\" hx-sync=\"this:queue all\"><button hx-get=\"/profile\" hx-target=\"#page\">Profile</button> <button hx-get=\"/about\" hx-target=\"#page\">About</button>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
