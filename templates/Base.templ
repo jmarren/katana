@@ -1,0 +1,11 @@
+package templates
+
+templ Base(head *templ.Component, body *templ.Component) {
+	<!DOCTYPE html>
+	<html lang="en">
+		@Head(head)
+		<body hx-ext="head-support,preload" hx-headers="{}" hx-sync="this:queue all">
+			@(*body)
+		</body>
+	</html>
+}

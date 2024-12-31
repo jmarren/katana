@@ -1,0 +1,20 @@
+package templates
+
+
+templ IndexHead(child *templ.Component) {
+	@(*child)
+	<style>
+	#index-div {
+		font-size: 40px;
+		color: green;
+	} 
+</style>
+}
+
+templ IndexBody(child *templ.Component) {
+	<div id="index-div">
+	<h1>Index</h1>
+	@(*child)
+	</div>
+}
+
