@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/a-h/templ"
-	// "github.com/jmarren/katana/templates"
 )
 
 type ProfileBodyData struct {
@@ -22,11 +21,11 @@ type EmptyData struct{}
 type SquareHeadData EmptyData
 type SquareBodyData EmptyData
 
-func SquareBody(EmptyData) *SquareBodyData {
+func SquareBody(struct{}) *SquareBodyData {
 	return &SquareBodyData{}
 }
 
-func SquareHead(EmptyData) *SquareHeadData {
+func SquareHead(struct{}) *SquareHeadData {
 	return &SquareHeadData{}
 }
 
