@@ -1,0 +1,17 @@
+package templates
+
+import "github.com/jmarren/katana/data"
+
+templ SquareBody(d *data.SquareData) {
+	<div id="square"></div>
+}
+
+templ SquareHead() {
+	<style id="square-styles">
+		#square {
+			width: 100px;
+			height: 100px;
+			border: 1px solid blue;
+		} 
+	</style>
+}

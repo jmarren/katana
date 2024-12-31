@@ -1,0 +1,19 @@
+package templates
+
+import "github.com/jmarren/katana/build2"
+
+templ IndexHead2() {
+	<style>
+	#index-div {
+		font-size: 40px;
+		color: green;
+	} 
+</style>
+}
+
+templ IndexBody2(d *build2.IndexData) {
+	<div id="index-div">
+		<h1>Index</h1>
+		<div></div>
+	</div>
+}

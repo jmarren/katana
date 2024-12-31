@@ -28,8 +28,6 @@ func (i *Index) setData() {
 
 func (i *Index) setChild(child INode) {
 	child.setData()
-	// child.setHead(nil)
-	// child.setBody(nil)
 	i.setData()
 	i.setHead(child)
 	i.setBody(child)

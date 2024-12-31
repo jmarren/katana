@@ -1,0 +1,19 @@
+package templates
+
+templ ProfileBody(child *templ.Component) {
+	<div id="profile">
+		@(*child)
+		<!--		{ data.Username } -->
+	</div>
+}
+
+templ ProfileHead(child *templ.Component) {
+	@(*child)
+	<style id="profile-styles">
+		#profile {
+			color: red;
+			background-color: yellow;
+			font-size: 30px;
+		}
+	</style>
+}
