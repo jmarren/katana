@@ -16,6 +16,7 @@ func main() {
 
 	http.HandleFunc("GET /{page}", handlers.PageHandler)
 	http.HandleFunc("GET /square/{color}", handlers.SquareHandler)
+	http.HandleFunc("GET /circle/{color}", handlers.CircleHandler)
 
 	http.ListenAndServe(":8080", nil)
 }

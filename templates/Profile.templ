@@ -4,13 +4,15 @@ import "github.com/jmarren/katana/data"
 
 templ ProfileBody(d *data.ProfileBodyData) {
 	<div id="page">
-		@(*(d.Child))
+		@(*(d.Circle))
+		@(*(d.Square))
 		{ d.Username }
 	</div>
 }
 
 templ ProfileHead(d *data.ProfileHeadData) {
-	@(*(d.Child))
+	@(*(d.Circle))
+	@(*(d.Square))
 	<style id="profile-styles">
 		#page {
 			color: red;

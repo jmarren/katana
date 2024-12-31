@@ -1,10 +1,9 @@
 package handlers
 
 import (
+	"fmt"
 	"github.com/jmarren/katana/cmpt"
 	"github.com/jmarren/katana/render"
-	// "github.com/jmarren/katana/templates"
-	"fmt"
 	"net/http"
 )
 
@@ -19,7 +18,6 @@ func PageHandler(w http.ResponseWriter, r *http.Request) {
 	default:
 		ProfileHandler(w, r)
 	}
-
 }
 
 func ProfileHandler(w http.ResponseWriter, r *http.Request) {
@@ -27,7 +25,11 @@ func ProfileHandler(w http.ResponseWriter, r *http.Request) {
 	if squareColor == "" {
 		squareColor = "red"
 	}
-	profile := cmpt.Profile(r, cmpt.Square(squareColor))
+	circleColor := r.URL.Query().Get("circle")
+	if circleColor == "" {
+		circleColor = "red"
+	}
+	profile := cmpt.Profile(r, cmpt.Square(squareColor), cmpt.Circle(circleColor))
 	render.RenderPath(profile, w, r, "page")
 }
 
@@ -40,4 +42,10 @@ func SquareHandler(w http.ResponseWriter, r *http.Request) {
 	color := r.PathValue("color")
 	square := cmpt.Square(color)
 	render.RenderQuery(square, w, r, color)
+}
+
+func CircleHandler(w http.ResponseWriter, r *http.Request) {
+	color := r.PathValue("color")
+	circle := cmpt.Circle(color)
+	render.RenderQuery(circle, w, r, color)
 }

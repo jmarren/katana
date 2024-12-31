@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func Profile(r *http.Request, square *src.Component) *src.Component {
+func Profile(r *http.Request, square *src.Component, circle *src.Component) *src.Component {
 	profileHeadCtr := src.EltCtr[data.ProfileHeadCtr, *data.ProfileHeadData]{
 		Ctr:       data.ProfileHead,
 		TemplFunc: templates.ProfileHead,
@@ -22,11 +22,13 @@ func Profile(r *http.Request, square *src.Component) *src.Component {
 
 	profile := profileFunc(
 		data.ProfileBodyCtr{
-			R:     r,
-			Child: square.Body,
+			R:      r,
+			Square: square.Body,
+			Circle: circle.Body,
 		},
 		data.ProfileHeadCtr{
-			Child: square.Head,
+			Square: square.Head,
+			Circle: circle.Head,
 		},
 	)
 	return profile

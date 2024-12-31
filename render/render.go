@@ -17,7 +17,7 @@ func RenderPath(c *src.Component, w http.ResponseWriter, r *http.Request, path s
 			fmt.Printf("error: %s\n", err)
 		}
 		w.Header().Set("HX-Push-Url", newUrl)
-		c.Render(w, r, templates.WrapAppend)
+		c.Render(w, r, templates.WrapMerge)
 	} else {
 		r.SetPathValue(c.Name, path)
 		c.Render(w, r, templates.Basefunc)

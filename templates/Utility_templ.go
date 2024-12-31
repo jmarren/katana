@@ -31,7 +31,7 @@ func WrapMerge(c *src.Component) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<head hx-merge=\"merge\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<head hx-head=\"merge\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -72,7 +72,7 @@ func WrapAppend(c *src.Component) templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<head hx-merge=\"append\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<head hx-head=\"append\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

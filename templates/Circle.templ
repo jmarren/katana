@@ -1,0 +1,27 @@
+
+package templates
+
+import (
+	"fmt"
+	"github.com/jmarren/katana/data"
+)
+
+templ CircleBody(d *data.CircleBodyData) {
+	<div id="circle" class={ fmt.Sprintf("%s-border", d.Color) } hx-get="/circle/blue" hx-trigger="click" hx-swap="outerHTML"></div>
+}
+
+templ CircleHead(d *data.CircleHeadData) {
+	<style id="circle-styles">
+		#circle {
+			border-radius: 100%; 
+			width: 100px;
+			height: 100px;
+		} 
+		.red-border {
+			border: 10px solid red;
+		} 
+		.blue-border {
+			border: 10px solid blue;
+		} 
+	</style>
+}
